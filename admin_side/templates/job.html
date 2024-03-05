@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     {% load static %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icon.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+  </head>
+  <body>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Job Openings</h2>
+            <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
+            <div class="text-center " style="margin: 10px;">
+                <form action="" method="Post">
+                    {% csrf_token %}
+                    <div class="row mt-3">
+                        {{form.post}}
+                        {{form.post.error}}
+                    </div>
+                    <div class="row mt-3">
+                        {{form.exp}}
+                        {{form.exp.error}}
+                    </div>
+                    <div class="row mt-3">
+                        {{form.qual}}
+                        {{form.qual.error}}
+                    </div>
+                    <div class="row mt-3">
+                        {{form.last_date}}
+                        {{form.last_date.error}}
+                    </div>
+                    <div class="row mt-3">
+                        {{form.description}}
+                        {{form.description.error}}
+                    </div>
+                    <div class=" row text-center mt-2">
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-block btn-info">Submit</button>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </form>
+              </div>
+        </div>
+
+      
+      </section>
+
+  
+  
+{% for i in job %}
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">{{i.post}}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{i.exp}}</h5>
+    <h5 class="card-title">{{i.qual}}</h5>
+    <h5 class="card-title">{{i.last_date}}</h5>
+    <p class="card-text">{{i.description}}</p>
+  </div>
+</div>
+{% endfor %}
+
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script src="{% static 'js/script.js' %}"></script>
+      
+
+  </body>
+</html>

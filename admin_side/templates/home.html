@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ header.general_title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icon.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <header>
+        <div class="header_container">
+            <div class="top">
+                <div class="top_container">
+                    <ul>
+                        <li><i class="fa-regular fa-clock"></i> {{ header.working_days }}</li>
+                        <li><i class="fa-solid fa-phone"></i> {{ header.phone }}</li>
+                    </ul>
+                    <ul>
+                        <li><a href="{{ header.social1 }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="{{ header.social2 }}"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="{{ header.social3 }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        <li><a href="{{ header.social4 }}"><i class="fa-brands fa-github-alt"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottom_container">
+                   <a href="" > <h2>{{ header.title }}</h2> </a>
+                    <ul>
+                        <li><a href="#home">{{ header.path1 }}</a></li>
+                        <li><a href="#services">{{ header.path2 }}</a></li>
+                        <li><a href="#about">{{ header.path3 }}</a></li>
+                        <li><a href="#testimonials">{{ header.path4 }}</a></li>
+                        {% comment %} <li><a href="#contact">{{ header.path5 }}</a></li> {% endcomment %}
+                        <li><a href="{% url 'feed' %}">Feedback</a></li>
+                        <li><a href="{% url 'job' %}">{{ header.path6 }}</a></li>
+                        
+                    </ul>
+                    <span onclick="menu_bar()">
+                        <i class="fa-sharp fa-solid fa-bars"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="home" class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            {% for i in home %}
+                <div style="background-image: url({{ i.background.url }});" class="swiper-slide">
+                    <div class="home_content">
+                        <h4>{{ i.subtitle }}</h4>
+                        <h1>{{ i.title }}</h1>
+                        <p>{{ i.text }}</p>
+                        <a href="#{{ i.button_link }}">{{ i.button }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+      <!-- <div class="home_bottom">
+            <div class="home_bottom_container">
+                <div>
+                    <h4>{{ callback.title }}</h4>
+                    <p>{{ callback.text }}</p>
+                </div>
+                <a href="#{{ callback.button_link }}">{{ callback.button }}</a>
+            </div>
+      </div> -->
+      <section id="services">
+        <div class="title">
+            <h2>{{ titles.title1 }} <span>{{ titles.colored_title1 }}</span></h2>
+            <p>{{ titles.subtitle1 }}</p>
+        </div>
+        <div class="services_container">
+            {% for i in services %}
+                <div class="services_content">
+                    <img src={{ i.img.url }} />
+                    <div class="info">
+                        <h4>{{ i.title }}</h4>
+                        <p>{{ i.text }}</p>
+                        <a href="#about">{{ i.button }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+      </section>
+      <section style="background-image: url({{ info.background.url }});" id="info">
+        <div class="info_container">
+            <div class="left">
+                {% comment %} <h5>{{ info.subtitle }}</h5> {% endcomment %}
+                <h2>{{ info.title }} <br /> <span>{{ info.colored_title }}</span></h2>
+                <p>{{ info.text1 }}<br /><br />{{ info.text2 }}</p>
+                <a href="#testimonials">{{ info.button }}</a>
+            </div>
+            <div class="right">
+                {% for i in count %}
+                    <div class="info_content">
+                        <h2>{{ i.num }}</h2>
+                        <h4>{{ i.title }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+      </section>
+      <section id="about">
+        <div class="about_container">
+            <img src={{ about.img.url }} />
+            <div class="about_info">
+                <div class="title">
+                    <p>{{ titles.subtitle2 }}</p>
+                    <h2>{{ titles.title2 }} <span>{{ titles.colored_title2 }}</span></h2>
+                </div>
+                <p>{{ about.text1 }}
+                    <br />
+                    <br />
+                    {{ about.text2 }}
+                </p>
+                <a href="{{ about.button_link }}" target="_blank">{{ about.button }}</a>
+            </div>
+        </div>
+      </section>
+      <section id="testimonials">
+            <div class="title">
+                <h2>{{ titles.title3 }} <span>{{ titles.colored_title3 }}</span></h2>
+                <p>{{ titles.subtitle3 }}</p>
+            </div>
+            <div class="swiper2 mySwiper2">
+                <div class="swiper-wrapper">
+                    {% for i in testimonials %}
+                        <div class="swiper-slide">
+                            <h4>{{ i.name }}</h4>
+                            <span>{{ i.Company }}</span><br>
+                            <span>{{ i.position }}</span>
+                            <p>{{ i.text }}</p>
+                            {% comment %} <img src={{ i.img.url }} /> {% endcomment %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+      </section>
+      <div class="swiper3 mySwiper3">
+          <div class="swiper-wrapper">
+            {% for i in sponsors %}
+                <div class="swiper-slide"><img width="200px" height="150px" src={{ i.img.url }} /></div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+      </div>
+      <footer>
+        <div class="top">
+            <div class="top_container">
+                <div class="footer_content">
+                    <h4>Finance Business</h4>
+                    <p>A finance business involves managing financial transactions, investments, and assets to help individuals and organizations achieve their financial goals.</p>
+</p>
+                    <ul>
+                        <li><a href="{{ header.social1 }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="{{ header.social2 }}"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="{{ header.social3 }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        <li><a href="{{ header.social4 }}"><i class="fa-brands fa-github-alt"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer_content">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="www.investopedia.com">Investopedia </a></li>
+                        <li><a href="www.bloomberg.com">Bloomberg</a></li>
+                        <li><a href="www.morningstar.com">Morningstar</a></li>
+                        <li><a href="www.wsj.com">The Wall Street Journal</a></li>
+                        <li><a href="finance.yahoo.com">Yahoo Finance</a></li>
+                    </ul>
+                </div>
+                <div class="footer_content">
+                    <h4>Additional Pages</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">How We Work</a></li>
+                        <li><a href="#contact">Quick Support</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#home">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+       
+      </footer>
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
